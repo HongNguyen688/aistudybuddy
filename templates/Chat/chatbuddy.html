@@ -1,0 +1,66 @@
+{% extends "layout.html" %} {% block title %} Chatbot Buddy {% endblock %}
+{%block bodycontent %}
+<div class="welcomerow">
+  <h2 class="chatwelcome">
+    Hi, {{user.username}}. I am here to help you study!
+  </h2>
+
+  <button class="newchat"><a href="{% url 'chatbuddy' %}">New Chat</a></button>
+</div>
+<div class="Chatcontainer">
+  <!-- List Title History-->
+  <div class="historytitle">
+    <h3>Your Conversation History</h3>
+
+    <ul>
+      {% for topic in titleHistory %}
+      <li>
+        <a href="{% url 'chatbuddy' %}?topic={{ topic.id }}">{{ topic.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Main Chat Content -->
+  <div class="chatbox">
+    {% if user.is_authenticated %}
+
+    <div class="chatcontent" id="js_chatmessages">
+      {% for chat in chatHistory %}
+      <div class="message user">
+        <strong>You</strong><br />
+        {{ chat.message }}
+      </div>
+
+      <div class="message ai">
+        <strong>BuddyBot</strong><br />
+        {{ chat.response }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="chatform">
+      <!-- Remove action="{% url 'chatbuddy' %}" -->
+      <form id="js_chatform" method="POST" action="{% url 'chatbuddy' %}">
+        {% csrf_token %} {% if currenttopic %}
+        <input type="hidden" name="idTopic" value="{{ currenttopic.id}}" />
+        {% endif %}
+
+        <input
+          class="chatinput"
+          type="text"
+          id="js_message"
+          name="message"
+          placeholder="Start talking with your BuddyBot."
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    {% if error %}
+    <p style="color: red">{{ error }}</p>
+    {% endif%} {% endif %}
+  </div>
+</div>
+
+{% endblock %}

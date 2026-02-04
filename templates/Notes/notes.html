@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %} Notes {% endblock %}
+
+{% block bodycontent %}
+
+  {% if user.is_authenticated %}
+    <h2>Hi, {{user.username}}. Here is your Notes!</h2>
+  {% endif %}
+{% endblock %}

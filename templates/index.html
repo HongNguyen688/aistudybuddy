@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %} AI Study Buddy {% endblock %}
+
+{% block bodycontent %}
+
+  <section class="hero">
+    <div class="heroContent">
+      <h1 class="indextitle">Your Best <br><span class="makeup"> AI Learning Buddy </span></h1>
+      {% if user.is_authenticated %}
+        <h2 class="welcome">Welcome back, {{user.username}}</h2>
+        <p class="title">Get smarter study help, made just for you by your AI buddy.</p>
+          <div class="herobtn">
+            <button class="btn"><a href="{% url 'chatbuddy' %}">Chat Buddy</a></button>
+            <button class="btn"><a href="{% url 'flashcards' %}">AI FlashCards</a></button>
+            <button class="btn"><a href="{% url 'quiz' %}">AI Quizzes</a></button>
+          </div>
+        {% else %}
+        <p class="title">Get smarter study help, made just for you by your AI buddy.</p>
+          <div class="herobtn">
+            <button class="btn"><a href="{% url 'login' %}">Login</a></button>
+            <button class="btn"><a href="{% url 'register' %}">Register</a></button>
+          </div>
+      {% endif %}
+    </div>
+  </section>
+
+{% endblock %}

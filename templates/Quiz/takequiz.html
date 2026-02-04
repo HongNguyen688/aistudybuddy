@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %} Take Quiz {% endblock %}
+
+{% block bodycontent %}
+  <div class="containerquiz">
+    {% if user.is_authenticated %}
+
+      {% if allquizzes %}
+        <h2> Do Your Quiz "{{ topic.name }}"</h2>
+
+        <!-- Quiz counter and score -->
+        <div class="counter-score">
+          <div>
+            <label> Quiz: <span id="js_currentquiz"> 1 </span> / {{ allquizzes|length }}</label>
+          </div>
+          <div id="js_score"> <b>
+            Your score: 0
+          </b></div>
+        </div>
+
+        <!-- Display Quiz -->
+        <div class="quizzes">      
+          {% for quiz in allquizzes %}
+            <div class="js_quizzes">
+              <div class="js_question">
+                <p><b>{{ quiz.order}}. {{ quiz.question }} </b></p>
+              </div>
+
+              <div class=" js_answer">
+                <div><button class="btnAnswer" {% if quiz.correct_answer == 1 %} data-correct="true" {% else %} data-correct="false" {% endif %}>A/ {{ quiz.answer1 }}</button></div>
+                <div ><button class="btnAnswer" {% if quiz.correct_answer == 2 %} data-correct="true" {% else %} data-correct="false" {% endif %}>B/ {{ quiz.answer2 }}</button></div>
+                <div ><button class="btnAnswer" {% if quiz.correct_answer == 3 %} data-correct="true" {% else %} data-correct="false" {% endif %}>C/ {{ quiz.answer3 }}</button></div>
+                <div ><button class="btnAnswer" {% if quiz.correct_answer == 4 %} data-correct="true" {% else %} data-correct="false" {% endif %}>D/ {{ quiz.answer4 }}</button></div>
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+
+        <br><br>
+
+        <!-- button control-->
+        <div>
+          <button id="js_previous"> Previous </button>
+          <button id="js_next"> Next </button>
+        </div>
+        
+        <div id="js_doneBtns" style="display:none;">
+          <p id="js_scoreMsg"> You are done ... </p>
+          <button class="cancelbtn" onclick="window.location.href='/' ">Cancel</button>
+          <button class="continuebtn" onclick="window.location.href='/quiz/quiz' ">Take Quiz</button>
+        </div>
+
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

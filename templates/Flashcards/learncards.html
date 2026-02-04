@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %} Learn FlashCards {% endblock %}
+
+{% block bodycontent %}
+<div class="containercard">
+  <div>
+    {% if user.is_authenticated %}
+      {% if flashcards %}
+        <div>
+          {% if topic %}
+            <h2> Practice Your Flashcards "{{ topic.name }}"</h2>
+          {% else %}
+            <h2> Practice Your Flashcards</h2>
+          {% endif %}
+        </div>
+
+        <!-- Card counter -->
+        <div>
+          <label class="labelscard"> Flashcards <span id="js_currentCard">1</span> / {{ flashcards|length }}</label>
+        </div>
+        <br>
+
+        <!-- Display Card -->
+        <div>
+          {% for card in flashcards %}
+            <div class="flashcard js_flashcard">
+              <div class="front js_front">
+                {{ card.question}}
+              </div>
+              <div class="back js_back">
+                {{ card.answer}}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <br><br>
+
+        <!-- button control -->
+        <div>
+          <button id="js_prevbtn"> Previous </button>
+          <button id="js_flipbtn"> Flip </button>
+          <button id="js_nextbtn"> Next </button>
+        </div>
+       
+        <div id="js_doneButtons" style="display:none;">
+          <p id="js_message"> You are done ... </p>
+          <button class="cancelbtn" onclick="window.location.href='/' ">Cancel</button>
+          <button class="continuebtn" onclick="window.location.href='/flashcards/flashcards' ">Learn Cards</button>
+        </div>
+
+        <br><br>
+      {% else %}
+        <p> No flashcards to Practice </p>
+      {% endif %}
+    {% else %}
+      <p> Let <a href="{% url 'login' %}"> log in </a>to practice flashcards.</p>
+    {% endif %}
+
+  </div>
+</div>
+ 
+{% endblock %}

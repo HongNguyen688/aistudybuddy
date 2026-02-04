@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block title %} FlashCards {% endblock %}
+
+{% block bodycontent %}
+
+  {% if user.is_authenticated %}
+    <br>
+    <h1>Hi, {{user.username}}. Let's create your Flashcards!</h1>
+    <br>
+    {% if error %}
+          <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    <br>
+
+    <div class="FCcontainer">
+      <!-- FlashCard Title History-->
+      <div class="listtitle">
+        <h3> Your Flashcard History <h3>
+        
+        <ul>
+          {% for topic in cardtopics %}
+            <li>
+              <a href="{%url 'flashcards' %}?topic={{ topic.id }}"> {{ topic.name }} </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Create flash cards-->
+      <div class="uploadfile">
+        <h2> Start building your Flashcards!</h2>
+        
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div>
+            <label > Upload your file:</label>
+            <input type="file" name="fileupload" accept=".pdf" required>
+          </div>
+          <div>
+            <label>Number of flashcards: </label>
+            <input type="number" name="numbercards" min="1" max="50" required>
+            <label><i> You can from 1 to 50 flashcards </i></label>
+          </div>
+          <div>
+            <button type="submit" class="createcard"> Create Flashcards </button>
+          </div>
+        </form>
+
+        <br><br>
+        
+        <!-- Review Generated Flash Cards-->
+        {% if flashcards %}
+          {% if topic %}
+            <h3> Review Your Flashcards for "{{ flashcards.0.topic.name }}"</h3>
+          {% else %}
+            <h3> Review Your Flashcards </h3>
+          {% endif %}
+          <br>
+          {% for card in flashcards %}
+            <div>
+              <div>
+                <b>Question:</b> {{ card.question }}
+              </div>
+              <div >
+                <blockquote class="blockquote">
+                  <b>Answer:</b> {{ card.answer }}
+                </blockquote>
+              </div>
+            </div>
+            
+            <br><br>
+          {% endfor %}
+        {% endif %}
+
+        <!-- Button Controls -->
+        {% if flashcards%}
+          <div>
+            <button class="btn"><a href=" {% url 'learncards' %}?topic={{ flashcards.0.topic.id }} "  onclick="myalet" >Save and Learn </a></button>
+
+          </div>
+        {% endif %}
+
+      {% else %}
+          <p>Let's login to generate flashcards. <a href=" {% url 'login' %} ">Log in</a> or <a href="{% url 'register' %}">Register</a></p>
+      {% endif %}
+      </div>
+    </div>
+
+{% endblock %}

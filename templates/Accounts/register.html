@@ -1,0 +1,51 @@
+{% extends "layout.html"%}
+
+{% block title %} Register {% endblock %}
+
+{% block bodycontent %}
+
+  {% if message %}
+    <div>{{ message }}</div>
+  {% endif %}
+
+  <form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <h1 class="ACtitle"> Register </h1>
+
+    <div>
+      <div>
+        <label>Username</label>
+      </div>
+      <div>
+        <input type="text" class="form-control" name="username" placeholder="Username">
+      </div>
+      <div>
+        <label> Email Address</label>
+      </div>
+      <div>
+        <input type="email" class="form-control" name="email" placeholder="Your Email">
+      </div>
+
+      <div>
+        <label>Password</label>
+      </div>
+      <div>
+        <input type="password" class="form-control" name="password" placeholder="Password" >
+      </div>
+      <div>
+        <label class="col-form-label">Re-Password</label>
+      </div>
+      <div>
+        <input type="password" class="form-control" name="confirmpassword" placeholder="Re-Password" >
+      </div>
+
+      <br>
+      <input class="inputbtn" type="submit" value="Register">
+
+    </div>
+  </form>
+
+  <br>
+  <p> If you already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
+  
+{% endblock %}

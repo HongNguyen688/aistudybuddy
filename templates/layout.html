@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}AI Study Buddy{% endblock %}</title>
+
+    <link href="{% static 'CSS/account.css' %}" rel="stylesheet">
+    <link href="{% static 'CSS/chatbuddy.css' %}" rel="stylesheet">
+    <link href="{% static 'CSS/flashcard.css' %}" rel="stylesheet">
+    <link href="{% static 'CSS/quiz.css' %}" rel="stylesheet">
+    <link href="{% static 'CSS/styles.css' %}" rel="stylesheet">
+
+    <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon">
+
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="navcontrol">
+        <div class="navbrand">
+          <a href="{% url 'index' %}">AI Study Buddy</a>
+        </div>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger" id="js_hamburger">&#9776;</button>
+      </div>
+
+      <ul class="navlinks" id="js_navlinks">
+        {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}current{% endif %}">Home </a>
+          </li>
+          <li>
+            <a href="{% url 'chatbuddy' %}" class="{% if request.resolver_match.url_name == 'chatbuddy' %}current{% endif %}">Chat Buddy</a>
+          </li>
+          <!--
+          <li>
+            <a href="{% url 'notes' %}" class="{% if request.resolver_match.url_name == 'notes' %}current{% endif %}">Notes</a>
+          </li>  -->
+          <li>
+            <a href="{% url 'flashcards' %}" class="{% if request.resolver_match.url_name == 'flashcards' %}current{% endif %}">AI FlashCards</a>
+          </li>
+          <li>
+            <a href="{% url 'quiz' %}" class="{% if request.resolver_match.url_name == 'quiz' %}current{% endif %}">AI Quizzes</a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+            <li>
+              <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a href="{% url 'register' %}">Register</a>
+            </li>
+          {% endif %}
+      </ul>
+    
+    </nav>
+    
+     
+    <main>
+      {% block bodycontent %}
+        
+      {% endblock %}
+    </main>
+        
+     
+    <footer>
+      <p>&copy; 2025 AI Study Buddy. Designed by Hong Nguyen. </p>
+    </footer>
+    
+    <script src="{% static 'JS/chat.js' %}"></script> 
+    <script src="{% static 'JS/flashcard.js' %}"></script>
+    <script src="{% static 'JS/index.js' %}"></script>
+    <script src="{% static 'JS/quiz.js' %}"></script>
+
+  </body>
+
+</html>

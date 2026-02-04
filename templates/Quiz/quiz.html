@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block bodycontent %}
+
+  {% if user.is_authenticated %}
+    <br>
+    <h2>Hi, {{user.username}}. Let's Create and Take quiz!</h2>
+    <br>
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <br>
+    <div class="Quizcontainer">
+      <!-- Quiz Title History -->
+      <div class="lefttitle">
+        {% if topics %}
+          <h3>Your Quiz History</h3>
+          <ul>
+            {% for topic in topics %}
+              <li>
+                <a href="{% url 'quiz' %}?topic={{ topic.id }}">{{ topic.name}}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <!-- Create Quiz --> 
+      <div class="uploadpdf">
+        <h2>Start building your Quiz!</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token%}
+          <div>
+            <label> Upload your file: </label>
+            <input type="file" name="fileupload" accept=".pdf" required>
+          </div>
+          <div>
+            <label> Number of quizzes: </label>
+            <input type="number" name="numberquizzes" min="1" max="50" required>
+            <label><i> You can from 1 to 50 Questions </i></label>
+          </div>
+          <div>
+            <Button type="submit" > Create Quizzes </Button>
+          </div>
+        </form>
+      
+      
+        <!-- Review Quiz -->
+        {% if allquizzes %}
+          <div>
+            <h3>Review Your Quizzes for "{{ allquizzes.0.topic.name }}"</h3>
+            <ul>
+              {% for quiz in allquizzes %}
+              <li class="blockquote">
+                <div><b>Question{{ quiz.order}}. {{ quiz.question }}</b></div>
+                <div> A) {{ quiz.answer1 }}</div>
+                  <div> B) {{ quiz.answer2 }}</div>
+                  <div> C) {{ quiz.answer3 }}</div>
+                  <div> D) {{ quiz.answer4 }}</div>
+                  <div class="correct"><i>Correct Answer: {{ quiz.correct_answer|upper }}</i></div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        
+        {% endif %}
+    
+        {% if allquizzes %}
+          <div>
+            <button class="btn"><a href="{% url 'takequiz' %}?topic={{ allquizzes.0.topic.id }} " > Take Quiz </a></button>
+          </div>
+        {% endif %}
+      </div>
+     
+    </div>
+  {% endif %}
+{% endblock %}

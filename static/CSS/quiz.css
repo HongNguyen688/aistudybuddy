@@ -1,0 +1,147 @@
+.Quizcontainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 15px auto;
+  background-color: #f9f9f9;
+}
+
+/* Left: Title History */
+.lefttitle{
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba( 0, 0, 0, 0.1);
+}
+
+/* Right: Form Upload File PDF */
+.uploadpdf{
+  flex: 2;
+  min-width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba( 0, 0, 0, 0.1);
+}
+
+
+h1, h2, h3 {
+  color: #1e90ff;
+}
+
+ul{
+  list-style-type: none;
+}
+
+ul li{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+ul li a {
+  text-decoration: none;
+  color: #086db4;
+}
+
+.containerquiz{
+  max-width: 868px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.counter-score{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.quizzes{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  height: 350px;
+  overflow-y: auto;
+  border: 2px solid #007BFF;
+  border-radius: 10px;
+  padding: 40px;
+  margin: 20px auto;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #f0f8ff;
+  box-shadow: 2px 2px 10px rgba( 0, 0, 0, 0.1);
+  min-height: 200px;
+  cursor: pointer;
+}
+
+.btnAnswer{
+  padding: 12px 20px;
+  background-color: #1e90ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+
+.btnAnswer:hover {
+  background-color: #1c86ee;
+  color: #ffffff;
+}
+
+.cancelbtn{
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f8ff;
+  border: 2px solid red;
+  color: #000000;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.cancelbtn:hover{
+  background-color: red;
+  color: #ffffff;
+}
+
+.continuebtn{
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f8ff;
+  border: 2px solid #1e90ff;
+  color: #000000;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.continuebtn:hover{
+  background-color:  #1e90ff;
+  color: #ffffff;
+}
+
+@media (max-width: 868px) {
+  .FCcontainer{
+    gap: 5px;
+  }
+  .quizzes{
+    font-size: 18px;
+    text-align: left;
+    padding: 10px;
+  }
+  .btnAnswer{
+    font-size: 14px;
+  }
+}

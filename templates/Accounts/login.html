@@ -1,0 +1,39 @@
+{% extends "layout.html"%}
+
+{% block title %} Login {% endblock %}
+
+{% block bodycontent %}
+
+  {% if message %}
+    <div>{{ message }}</div>
+  {% endif %}
+
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <h1 class="ACtitle"> Login </h1>
+
+    <div>
+      <div>
+        <label>Username</label>
+      </div>
+      <div>
+        <input type="text" class="form-control" name="username" placeholder="Username">
+      </div>
+
+      <div>
+        <label class="col-form-label">Password</label>
+      </div>
+      <div>
+        <input type="password" class="form-control" name="password" placeholder="Password" >
+      </div>
+
+      <br>
+      <input class="inputbtn" type="submit" value="Login">
+    
+    </div>
+  </form>
+
+  <br>
+  <p> If you don't have an account? <a href="{% url 'register' %}">Register here.</a></p>
+  
+{% endblock %}
