@@ -26,7 +26,7 @@ jiter==0.9.0
 lib50==3.0.12
 markdown2==2.5.2
 oauthlib==3.3.1
-openai==1.77.0
+openai==1.0
 packaging==24.2
 pexpect==4.9.0
 pipenv==2025.0.4
@@ -36,8 +36,8 @@ pycparser==2.22
 pydantic==2.11.4
 pydantic_core==2.33.2
 PyJWT==2.10.1
-PyMuPDF==1.26.0
-python-dotenv==1.1.0
+PyMuPDF==1.24
+python-dotenv==1.0
 python3-openid==3.2.0
 pytz==2024.2
 PyYAML==6.0.2
@@ -57,3 +57,5 @@ typing_extensions==4.13.2
 urllib3==2.3.0
 virtualenv==20.35.3
 whitenoise==6.11.0
+gunicorn>=22.0
+whitenoise[brotli]>=6.7
