@@ -13,12 +13,6 @@ djangorestframework-simplejwt>=5.3
 djoser>=2.3
 social-auth-app-django>=5.4
 
-# UI / parsing
-django-bootstrap4>=24.4
-beautifulsoup4>=4.12
-markdown2>=2.5
-requests>=2.32
-
 # AI / PDFs
 openai>=1.0
 PyMuPDF>=1.24
