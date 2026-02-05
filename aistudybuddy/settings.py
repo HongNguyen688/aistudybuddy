@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
-import os
 import dj_database_url
+import os
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,6 +35,7 @@ SECRET_KEY = os.getenv(
 DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "yes")
 
 ALLOWED_HOSTS = [
+  "https://aistudybuddy-x0ii.onrender.com",
     ".onrender.com",
     "localhost",
     "127.0.0.1",
@@ -90,10 +93,10 @@ WSGI_APPLICATION = 'aistudybuddy.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
-        conn_health_checks=True,
+        ssl_require=not DEBUG,
     )
 }
 
@@ -138,13 +141,18 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # WHITENOISE_MANIFEST_STRICT = False
 
-MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    # ... all other middleware ...
-]
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
