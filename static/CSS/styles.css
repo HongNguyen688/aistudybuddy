@@ -84,7 +84,7 @@ main {
 /* Hero section */
 
 .hero {
-  background-image: url("/static/images/BG.jpg");
+  background-image: url("../Images/BG.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
